@@ -45,8 +45,12 @@
       (mi_fp, si_haptic, the QCOM external modules) and the dtb/dtbo images.
       See vendor/extra/BoardConfigKernel.mk.
 
-      Not shallow-cloned on purpose: scripts/setlocalversion reads git history
-      to build the kernel version string, and the modules must agree with it.
+      No clone-depth here, but CI still runs `repo init --depth 1` because the
+      crave rules ask for it, so in practice these arrive shallow and
+      scripts/setlocalversion falls back to a bare SHA rather than a
+      tag-derived version string. Harmless: the Image that gets installed is
+      Kono-Ha's, not this tree's. Drop --depth from ci/crave-build.sh if a
+      full-history kernel version string is ever wanted.
     -->
 
     <project path="kernel/xiaomi/sm8735"
