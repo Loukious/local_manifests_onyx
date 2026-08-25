@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  crDroid 16.0 local manifest for onyx (POCO F7).
+
+  Replaces the four hand-maintained local manifests this grew out of
+  (onyx.xml, roomservice.xml, custom-gapps-launcher.xml, pixelos-gms.xml).
+
+  Everything device/xiaomi/onyx's crdroid.dependencies would pull is pinned here
+  explicitly, so `breakfast` never has to run roomservice to produce a complete
+  tree. The roomservice patch that whitelists the 'Loukious' org stays in the
+  patch set as belt-and-braces.
+
+  Remotes 'crdroid' (https://github.com/) and 'crdroid-gitlab'
+  (https://gitlab.com/) come from snippets/crdroid.xml. Every project below
+  states its revision explicitly rather than inheriting a remote default, so a
+  crDroid branch bump can't silently move our pins.
+-->
+<manifest>
+
+    <remote name="loukious"
+            fetch="https://github.com/" />
+
+    <remote name="pixelos"
+            fetch="https://gitlab.com/" />
+
+    <!-- ============================ device ============================ -->
+
+    <project path="device/xiaomi/onyx"
+             name="crdroidandroid/android_device_xiaomi_onyx"
+             remote="crdroid"
+             revision="refs/heads/16.0" />
+
+    <project path="hardware/xiaomi"
+             name="crdroidandroid/android_hardware_xiaomi"
+             remote="crdroid"
+             revision="refs/heads/16.0" />
+
+    <!-- ============================ kernel ============================
+      Since device commit 575e7da99 ("onyx: Switch source built dtbo, kernel
+      and modules") the kernel is built from source; device/xiaomi/onyx-kernel
+      is gone and is deliberately NOT listed here.
+
+      The source build still has to happen even though the Kono-Ha Image is
+      what ultimately gets installed: it is what produces the vendor modules
+      (mi_fp, si_haptic, the QCOM external modules) and the dtb/dtbo images.
+      See vendor/extra/BoardConfigKernel.mk.
+
+      Not shallow-cloned on purpose: scripts/setlocalversion reads git history
+      to build the kernel version string, and the modules must agree with it.
+    -->
+
+    <project path="kernel/xiaomi/sm8735"
+             name="crdroidandroid/android_kernel_xiaomi_sm8735"
+             remote="crdroid"
+             revision="refs/heads/16.0" />
+
+    <project path="kernel/xiaomi/sm8735-devicetrees"
+             name="crdroidandroid/android_kernel_xiaomi_sm8735-devicetrees"
+             remote="crdroid"
+             revision="refs/heads/16.0" />
+
+    <project path="kernel/xiaomi/sm8735-modules"
+             name="crdroidandroid/android_kernel_xiaomi_sm8735-modules"
+             remote="crdroid"
+             revision="refs/heads/16.0" />
+
+    <!-- ======================== vendor blobs ==========================
+      All shallow: these are pure binary trees, nothing at build time reads
+      their git history.
+    -->
+
+    <project path="vendor/xiaomi/onyx"
+             name="crdroidandroid/proprietary_vendor_xiaomi_onyx"
+             remote="crdroid-gitlab"
+             revision="refs/heads/16.0"
+             clone-depth="1" />
+
+    <!-- The ~350MB of OS3.0.302.0 radio/ images and LHDC-patched blobs that
+         differ from the tree above. apply.sh copies these over it; forking the
+         4GB vendor repo would blow GitHub's free LFS tier. -->
+    <project path="vendor/xiaomi/onyx-firmware"
+             name="Loukious/proprietary_vendor_xiaomi_onyx-firmware"
+             remote="loukious"
+             revision="refs/heads/16.0"
+             clone-depth="1" />
+
+    <project path="vendor/xiaomi/onyx-lhdc"
+             name="Loukious/android_vendor_xiaomi_onyx-lhdc"
+             remote="crdroid-gitlab"
+             revision="refs/heads/16.0"
+             clone-depth="1" />
+
+    <project path="vendor/xiaomi/onyx-miuicamera"
+             name="crdroidandroid/proprietary_vendor_xiaomi_miuicamera"
+             remote="crdroid-gitlab"
+             revision="refs/heads/16.0-onyx"
+             clone-depth="1" />
+
+    <project path="device/xiaomi/onyx-miuicamera"
+             name="crdroidandroid/android_device_xiaomi_miuicamera"
+             remote="crdroid-gitlab"
+             revision="refs/heads/16.0-onyx"
+             clone-depth="1" />
+
+    <!-- ========================== crDroid extras ====================== -->
+
+    <project path="packages/apps/LunarisDolby"
+             name="crdroidandroid/android_packages_apps_LunarisDolby"
+             remote="crdroid"
+             revision="refs/heads/16.0" />
+
+    <project path="packages/apps/NotGameTurbo"
+             name="crdroidandroid/android_packages_apps_NotGameTurbo"
+             remote="crdroid"
+             revision="refs/heads/16.0" />
+
+    <project path="vendor/bcr"
+             name="crdroidandroid/android_vendor_bcr"
+             remote="crdroid"
+             revision="refs/heads/16.0" />
+
+    <!-- ===================== GApps: PixelOS 16 QPR2 ===================
+      Infinity-X (tejas101k/vendor_google_gms) is gone, which is also why no
+      &lt;remove-project&gt; is needed any more. The old pixelos-gms.xml existed
+      purely to undo custom-gapps-launcher.xml.
+
+      vendor/extra/product.mk inherits all five of these.
+    -->
+
+    <project path="vendor/pixel/gms"
+             name="pixelos-aosp/proprietary_vendor_pixel_gms-16.2"
+             remote="pixelos"
+             revision="refs/heads/sixteen-qpr2"
+             clone-depth="1" />
+
+    <project path="vendor/pixel/launcher"
+             name="pixelos-aosp/proprietary_vendor_pixel_launcher"
+             remote="pixelos"
+             revision="refs/heads/sixteen-qpr2"
+             clone-depth="1" />
+
+    <project path="vendor/pixel/themepicker"
+             name="pixelos-aosp/proprietary_vendor_pixel_themepicker"
+             remote="pixelos"
+             revision="refs/heads/sixteen-qpr2"
+             clone-depth="1" />
+
+    <project path="vendor/pixel/clocks"
+             name="pixelos-aosp/proprietary_vendor_pixel_clocks"
+             remote="pixelos"
+             revision="refs/heads/sixteen-qpr2"
+             clone-depth="1" />
+
+    <project path="vendor/pixel/sounds"
+             name="pixelos-aosp/proprietary_vendor_pixel_sounds"
+             remote="pixelos"
+             revision="refs/heads/sixteen-qpr2"
+             clone-depth="1" />
+
+    <!-- ========================= my own bits ========================== -->
+
+    <!-- Auto-included by board_config.mk and vendor/lineage/config/common.mk
+         purely by living at vendor/extra. Carries the PixelOS wiring and the
+         Kono-Ha kernel hook. -->
+    <project path="vendor/extra"
+             name="Loukious/android_vendor_extra"
+             remote="loukious"
+             revision="refs/heads/crdroid-16.0" />
+
+</manifest>
