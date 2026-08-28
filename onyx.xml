@@ -101,16 +101,21 @@
              clone-depth="1" />
 
     <!-- ==================== device-tree hard deps =====================
-      Evolution X ships none of these three, and the onyx device tree does not
+      Evolution X ships neither of these two, and the onyx device tree does not
       reference them defensively:
 
         BoardConfig.mk:285  include packages/apps/NotGameTurbo/BoardConfig.mk
-        device.mk:31        $(call inherit-product, vendor/bcr/bcr.mk)
         device.mk:175       LunarisDolby   (in PRODUCT_PACKAGES)
 
       A plain `include` and a bare PRODUCT_PACKAGES entry both hard-fail when
       the project is missing, so these come along from crDroid. They are
       standalone apps, not framework hooks.
+
+      crDroid's vendor/bcr is deliberately NOT here. Evo already ships bcr as a
+      prebuilt in vendor/extras (wired by vendor/lineage/config/telephony.mk),
+      and the two would define MODULE.TARGET.APPS.bcr twice. The device tree's
+      inherit of vendor/bcr/bcr.mk is removed by patch
+      device_xiaomi_onyx/0005-drop-crdroid-bcr.patch instead.
     -->
 
     <project path="packages/apps/NotGameTurbo"
@@ -120,11 +125,6 @@
 
     <project path="packages/apps/LunarisDolby"
              name="crdroidandroid/android_packages_apps_LunarisDolby"
-             remote="github"
-             revision="refs/heads/16.0" />
-
-    <project path="vendor/bcr"
-             name="crdroidandroid/android_vendor_bcr"
              remote="github"
              revision="refs/heads/16.0" />
 
