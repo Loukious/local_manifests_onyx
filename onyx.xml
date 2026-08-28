@@ -75,10 +75,13 @@
 
     <!-- The ~350MB of OS3.0.302.0 radio/ images and the two LHDC-patched blobs
          that differ from the tree above. apply.sh copies these over it; forking
-         the 4GB vendor repo would blow GitHub's free LFS tier. -->
+         the 4GB vendor repo is unnecessary. Hosted on GitLab, not GitHub, so
+         the two images over 100MB can be stored whole via Git LFS (GitLab's
+         free tier: 10GB storage, no bandwidth metering) instead of split into
+         .partNN files. Needs the repo init git-lfs flag Evo already requires. -->
     <project path="vendor/xiaomi/onyx-firmware"
              name="Loukious/proprietary_vendor_xiaomi_onyx-firmware"
-             remote="github"
+             remote="gitlab"
              revision="refs/heads/16.0"
              clone-depth="1" />
 
