@@ -62,6 +62,19 @@
              remote="github"
              revision="refs/heads/16.0" />
 
+    <!-- The wlan driver we actually ship: MiCode's vendor_qcom_opensource_wlan
+         with the annibale-to-onyx port plus monitor mode and direct packet
+         injection. apply.sh rsyncs its four driver dirs over the sm8735-modules
+         copy before building; a repo sync reverts that, which is fine because
+         apply.sh runs after every sync. Standalone path because repo cannot
+         nest a project inside sm8735-modules, and vendor/qcom/opensource/wlan
+         is already taken by userspace (cld80211-lib, qcwcn, wcnss-service). -->
+    <project path="kernel/xiaomi/onyx-wlan"
+             name="Loukious/vendor_qcom_opensource_wlan"
+             remote="github"
+             revision="refs/heads/onyx-v-oss-monitor-direct"
+             clone-depth="1" />
+
     <!-- ======================== vendor blobs ==========================
       All shallow: these are pure binary trees, nothing at build time reads
       their git history.
