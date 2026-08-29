@@ -72,7 +72,7 @@
     <project path="kernel/xiaomi/onyx-wlan"
              name="Loukious/vendor_qcom_opensource_wlan"
              remote="github"
-             revision="refs/heads/onyx-v-oss-monitor-direct"
+             revision="refs/heads/onyx-v-oss-monitor-direct-konoha-abi"
              clone-depth="1" />
 
     <!-- ======================== vendor blobs ==========================
