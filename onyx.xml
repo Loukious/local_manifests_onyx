@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Evolution X (branch bka, Android 16) local manifest for onyx (POCO F7).
+  Evolution X (branch cnb, Android 17) local manifest for onyx (POCO F7).
+  Branch evolution-cnb of this repo, paired with the evolution-cnb branch of
+  crdroid_onyx_patches. The A16 stack lives on in the evolution-bka branches
+  of both -- keep the two in sync when a pin moves.
 
-  Why bka and not the newer cnb: bka pins aosp at refs/tags/android-16.0.0_r4
-  with <default revision="refs/heads/lineage-23.2">, which is the same Android
-  release as the onyx device tree, the bp4a release config, the OS3.0.302.0
-  firmware and the Kono-Ha kernel. cnb is Android 17 (lineage-24.0), which would
-  stack an OS jump on top of a ROM swap.
+  What this branch is: an EXPERIMENTAL A17 attempt. There is no onyx device
+  tree at 17.0/lineage-24.0 anywhere yet (not crDroid, not LineageOS, not
+  Evolution-X-Devices), so every device-side project below stays pinned at
+  its 16.0 branch. That stacks an OS jump on top of the ROM swap -- expect
+  the framework patch set to need re-porting, and treat any produced zip
+  as a test build, not an OTA. cnb pins aosp at refs/tags/android-17.0.0_r1
+  with <default revision="refs/heads/lineage-24.0">.
 
   The device tree stays crDroid's: crdroidandroid/android_device_xiaomi_onyx is
   a plain LineageOS tree (PRODUCT_NAME := lineage_onyx, and lineage_onyx.mk
