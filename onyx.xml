@@ -109,8 +109,11 @@
              revision="refs/heads/16.0"
              clone-depth="1" />
 
+    <!-- Fork carrying the modded 302 camera (fix33 lineage, commit 8754bab).
+         Upstream crdroidandroid ships the stock 3.0.7 APK: do NOT repoint
+         back, or the ROM loses every camera mod. -->
     <project path="vendor/xiaomi/onyx-miuicamera"
-             name="crdroidandroid/proprietary_vendor_xiaomi_miuicamera"
+             name="Loukious/proprietary_vendor_xiaomi_miuicamera"
              remote="gitlab"
              revision="refs/heads/16.0-onyx"
              clone-depth="1" />
