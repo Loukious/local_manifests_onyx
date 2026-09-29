@@ -5,13 +5,10 @@
   crdroid_onyx_patches. The A16 stack lives on in the evolution-bka branches
   of both, so keep the two in sync when a pin moves.
 
-  What this branch is: an EXPERIMENTAL A17 attempt. There is no onyx device
-  tree at 17.0/lineage-24.0 anywhere yet (not crDroid, not LineageOS, not
-  Evolution-X-Devices), so every device-side project below stays pinned at
-  its 16.0 branch. That stacks an OS jump on top of the ROM swap, so expect
-  the framework patch set to need re-porting, and treat any produced zip
-  as a test build, not an OTA. cnb pins aosp at refs/tags/android-17.0.0_r1
-  with <default revision="refs/heads/lineage-24.0">.
+  Android 17 now uses crDroid's published onyx 17.0 device/kernel/vendor
+  branches where available. The onyx MIUI camera device helper remains on
+  16.0-onyx because crDroid has not published a 17.0-onyx branch for that
+  repository yet. cnb pins AOSP through the lineage-24.0 platform branch.
 
   The device tree stays crDroid's: crdroidandroid/android_device_xiaomi_onyx is
   a plain LineageOS tree (PRODUCT_NAME := lineage_onyx, and lineage_onyx.mk
@@ -34,12 +31,12 @@
     <project path="device/xiaomi/onyx"
              name="crdroidandroid/android_device_xiaomi_onyx"
              remote="github"
-             revision="refs/heads/16.0" />
+             revision="refs/heads/17.0" />
 
     <project path="hardware/xiaomi"
              name="crdroidandroid/android_hardware_xiaomi"
              remote="github"
-             revision="refs/heads/16.0" />
+             revision="refs/heads/17.0" />
 
     <!-- ============================ kernel ============================
       Since device commit 575e7da99 ("onyx: Switch source built dtbo, kernel
@@ -55,17 +52,17 @@
     <project path="kernel/xiaomi/sm8735"
              name="crdroidandroid/android_kernel_xiaomi_sm8735"
              remote="github"
-             revision="refs/heads/16.0" />
+             revision="refs/heads/17.0" />
 
     <project path="kernel/xiaomi/sm8735-devicetrees"
              name="crdroidandroid/android_kernel_xiaomi_sm8735-devicetrees"
              remote="github"
-             revision="refs/heads/16.0" />
+             revision="refs/heads/17.0" />
 
     <project path="kernel/xiaomi/sm8735-modules"
              name="crdroidandroid/android_kernel_xiaomi_sm8735-modules"
              remote="github"
-             revision="refs/heads/16.0" />
+             revision="refs/heads/17.0" />
 
     <!-- The wlan driver we actually ship: MiCode's vendor_qcom_opensource_wlan
          with the annibale-to-onyx port plus monitor mode and direct packet
@@ -88,7 +85,7 @@
     <project path="vendor/xiaomi/onyx"
              name="crdroidandroid/proprietary_vendor_xiaomi_onyx"
              remote="gitlab"
-             revision="refs/heads/16.0"
+             revision="refs/heads/17.0"
              clone-depth="1" />
 
     <!-- The ~350MB of OS3.0.302.0 radio/ images and the two LHDC-patched blobs
