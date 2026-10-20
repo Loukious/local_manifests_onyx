@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- Compiled MoWA channel fixes; apply.sh overlays the WLAN source after sync. -->
+  <extend-project name="Loukious/vendor_qcom_opensource_wlan"
+                  path="kernel/xiaomi/onyx-wlan"
+                  revision="refs/heads/mowa-wide-channels-20261009" />
+  <remove-project name="LineageOS/android_external_wpa_supplicant_8" />
+  <project name="Loukious/android_external_wpa_supplicant_8"
+           path="external/wpa_supplicant_8" remote="github"
+           revision="refs/heads/mowa-5dot9-hotspot-20261009" />
+</manifest>
