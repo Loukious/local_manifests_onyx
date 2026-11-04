@@ -5,7 +5,7 @@
   crdroid_onyx_patches. The A16 stack lives on in the evolution-bka branches
   of both, so keep the two in sync when a pin moves.
 
-  Android 17 now uses crDroid's published onyx 17.0 device/kernel/vendor
+  Android 17 uses crDroid's published onyx 17.0 device/vendor
   branches where available. The onyx MIUI camera device helper remains on
   16.0-onyx because crDroid has not published a 17.0-onyx branch for that
   repository yet. cnb pins AOSP through the lineage-24.0 platform branch.
@@ -38,43 +38,14 @@
              remote="github"
              revision="refs/heads/17.0" />
 
-    <!-- ============================ kernel ============================
-      Since device commit 575e7da99 ("onyx: Switch source built dtbo, kernel
-      and modules") the kernel is built from source, so there is no
-      device/xiaomi/onyx-kernel prebuilt to list.
-
-      The source build still has to happen even though the Kono-Ha Image is what
-      ultimately gets installed: it is what produces the vendor modules (mi_fp,
-      si_haptic, the QCOM external modules) and the dtb/dtbo images. The Image
-      substitution happens in vendor/extra/BoardConfigKernel.mk.
-    -->
-
-    <project path="kernel/xiaomi/sm8735"
-             name="crdroidandroid/android_kernel_xiaomi_sm8735"
+    <!-- Matched Konoha prebuilt kernel, modules and device trees.
+         No crDroid kernel/module/device-tree source repositories are synced. -->
+    <project path="device/xiaomi/onyx-kernel"
+             name="Loukious/konoha-android17-6.18"
              remote="github"
-             revision="refs/heads/17.0" />
-
-    <project path="kernel/xiaomi/sm8735-devicetrees"
-             name="crdroidandroid/android_kernel_xiaomi_sm8735-devicetrees"
-             remote="github"
-             revision="refs/heads/17.0" />
-
-    <project path="kernel/xiaomi/sm8735-modules"
-             name="crdroidandroid/android_kernel_xiaomi_sm8735-modules"
-             remote="github"
-             revision="refs/heads/17.0" />
-
-    <!-- The wlan driver we actually ship: MiCode's vendor_qcom_opensource_wlan
-         with the annibale-to-onyx port plus monitor mode and direct packet
-         injection. apply.sh rsyncs its four driver dirs over the sm8735-modules
-         copy before building; a repo sync reverts that, which is fine because
-         apply.sh runs after every sync. Standalone path because repo cannot
-         nest a project inside sm8735-modules, and vendor/qcom/opensource/wlan
-         is already taken by userspace (cld80211-lib, qcwcn, wcnss-service). -->
-    <project path="kernel/xiaomi/onyx-wlan"
-             name="Loukious/vendor_qcom_opensource_wlan"
-             remote="github"
-             revision="refs/heads/onyx-v-oss-monitor-direct-konoha-abi"
+             revision="92dffd15e2099e2d57c70827a9e56a7f5d62f6a6"
+             upstream="refs/heads/prebuilt-onyx"
+             dest-branch="prebuilt-onyx"
              clone-depth="1" />
 
     <!-- ======================== vendor blobs ==========================
@@ -142,7 +113,8 @@
     <!-- ========================= my own bits ==========================
       Auto-included by build/make/core/board_config.mk and
       vendor/lineage/config/common.mk purely by living at vendor/extra.
-      Carries the Kono-Ha kernel Image hook and the unofficial build identity.
+      Carries the unofficial build identity. The device kernel configuration must
+      consume the matched Konoha prebuilts in device/xiaomi/onyx-kernel.
     -->
 
     <project path="vendor/extra"
