@@ -43,7 +43,7 @@
     <project path="device/xiaomi/onyx-kernel"
              name="Loukious/konoha-android17-6.18"
              remote="github"
-             revision="92dffd15e2099e2d57c70827a9e56a7f5d62f6a6"
+             revision="d98cb03db7a3785fe397bd72e08adc784843ca03"
              upstream="refs/heads/prebuilt-onyx"
              dest-branch="prebuilt-onyx"
              clone-depth="1" />
