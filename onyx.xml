@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Evolution X (branch cnb, Android 17) local manifest for onyx (POCO F7).
-  Branch evolution-cnb of this repo, paired with the evolution-cnb branch of
+  Branch evolution-cnb-konoha618, paired with the same branch of
   crdroid_onyx_patches. The A16 stack lives on in the evolution-bka branches
   of both, so keep the two in sync when a pin moves.
 
@@ -38,14 +38,13 @@
              remote="github"
              revision="refs/heads/17.0" />
 
-    <!-- Matched Konoha prebuilt kernel, modules and device trees.
-         No crDroid kernel/module/device-tree source repositories are synced. -->
-    <project path="device/xiaomi/onyx-kernel"
+    <!-- Build the accepted Onyx 6.18 source and its matching modules with Kleaf. -->
+    <project path="kernel/platform/kernel-6.18"
              name="Loukious/onyx-android17-6.18"
              remote="github"
-             revision="d98cb03db7a3785fe397bd72e08adc784843ca03"
-             upstream="refs/heads/prebuilt-onyx"
-             dest-branch="prebuilt-onyx"
+             revision="refs/heads/android17-6.18-lts"
+             upstream="refs/heads/android17-6.18-lts"
+             dest-branch="android17-6.18-lts"
              clone-depth="1" />
 
     <!-- ======================== vendor blobs ==========================
@@ -114,7 +113,7 @@
       Auto-included by build/make/core/board_config.mk and
       vendor/lineage/config/common.mk purely by living at vendor/extra.
       Carries the unofficial build identity. The device kernel configuration must
-      consume the matched Konoha prebuilts in device/xiaomi/onyx-kernel.
+      build the synced Onyx GKI and modules in kernel/platform/kernel-6.18.
     -->
 
     <project path="vendor/extra"
