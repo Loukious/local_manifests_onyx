@@ -41,7 +41,7 @@
     <!-- Matched Konoha prebuilt kernel, modules and device trees.
          No crDroid kernel/module/device-tree source repositories are synced. -->
     <project path="device/xiaomi/onyx-kernel"
-             name="Loukious/konoha-android17-6.18"
+             name="Loukious/onyx-android17-6.18"
              remote="github"
              revision="d98cb03db7a3785fe397bd72e08adc784843ca03"
              upstream="refs/heads/prebuilt-onyx"
